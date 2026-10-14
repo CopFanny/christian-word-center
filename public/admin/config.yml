@@ -1,0 +1,29 @@
+backend:
+  name: github
+  repo: CopFanny/christian-word-center
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "scriptures"
+    label: "Scriptures"
+    folder: "public/content/scriptures"
+    create: true
+    slug: "{{reference}}"
+    fields:
+      - { label: "Reference", name: "reference", widget: "string" }
+      - { label: "Text", name: "text", widget: "text" }
+      - { label: "Topic", name: "topic", widget: "string", required: false }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+
+  - name: "gallery"
+    label: "Gallery"
+    folder: "public/content/gallery"
+    create: true
+    slug: "{{title}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Image", name: "image", widget: "image" }

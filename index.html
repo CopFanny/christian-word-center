@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Christian Word Center is a place for scripture, prayers, encouragement, and uplifting Christian media."
+    />
+    <title>Christian Word Center</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body class="bg-slate-50 text-slate-800 antialiased">
+    <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+        <a href="#top" class="flex items-center gap-3">
+          <div class="flex h-11 w-11 items-center justify-center rounded-full bg-faith-600 text-lg font-bold text-white shadow-soft">C</div>
+          <div>
+            <div class="text-lg font-bold tracking-tight text-slate-900">Christian Word Center</div>
+            <div class="text-xs uppercase tracking-[0.22em] text-slate-500">Scripture & hope</div>
+          </div>
+        </a>
+
+        <nav class="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
+          <a href="#scriptures" class="transition hover:text-faith-700">Scriptures</a>
+          <a href="#gallery" class="transition hover:text-faith-700">Gallery</a>
+          <a href="#about" class="transition hover:text-faith-700">About</a>
+          <a href="#support" class="transition hover:text-faith-700">Support</a>
+        </nav>
+
+        <a href="#support" class="rounded-full bg-faith-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-faith-700">Give</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(110,73,213,0.18),transparent_32%),radial-gradient(circle_at_bottom_right,_rgba(34,197,94,0.15),transparent_22%)]"></div>
+        <div class="relative mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.2fr_0.8fr] md:py-24">
+          <div class="space-y-8">
+            <span class="inline-flex rounded-full border border-faith-200 bg-faith-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-faith-700">
+              Faith, hope, and truth
+            </span>
+            <div class="space-y-5">
+              <h1 class="max-w-xl text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+                God's word, shared with love and clarity.
+              </h1>
+              <p class="max-w-xl text-lg leading-8 text-slate-600">
+                A modern Christian platform for scripture, reflection, prayer, and images that point people toward Christ.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <a href="#scriptures" class="rounded-full bg-faith-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-faith-700">Read scripture</a>
+              <a href="#gallery" class="rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-faith-300 hover:text-faith-700">View gallery</a>
+            </div>
+
+            <div class="flex flex-wrap gap-6 pt-4 text-sm text-slate-600">
+              <div><span class="font-bold text-slate-900">KJV</span> public domain</div>
+              <div><span class="font-bold text-slate-900">Clean</span> responsive design</div>
+              <div><span class="font-bold text-slate-900">Easy</span> CMS updates</div>
+            </div>
+          </div>
+
+          <aside class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft">
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-faith-700">Featured verse</p>
+            <blockquote id="featured-verse" class="mt-5 text-2xl font-medium italic leading-relaxed text-slate-800">
+              Loading scripture...
+            </blockquote>
+            <div id="featured-reference" class="mt-6 text-sm font-medium uppercase tracking-[0.18em] text-slate-500">
+              —
+            </div>
+            <div class="mt-8 flex items-center gap-3">
+              <button id="copy-verse" class="rounded-full border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 transition hover:border-faith-300 hover:text-faith-700">
+                Copy verse
+              </button>
+              <button id="share-verse" class="rounded-full bg-slate-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-slate-700">
+                Share
+              </button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="scriptures" class="mx-auto max-w-6xl px-5 py-16">
+        <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-faith-700">Scripture</p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900">Read the word</h2>
+          </div>
+          <label class="relative block w-full max-w-md">
+            <span class="sr-only">Search scriptures</span>
+            <input
+              id="scripture-search"
+              type="search"
+              placeholder="Search verse text or reference"
+              class="w-full rounded-full border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 shadow-sm outline-none transition focus:border-faith-400 focus:ring-2 focus:ring-faith-100"
+            />
+          </label>
+        </div>
+
+        <div id="scripture-list" class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3"></div>
+      </section>
+
+      <section id="gallery" class="bg-white py-16">
+        <div class="mx-auto max-w-6xl px-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-faith-700">Gallery</p>
+              <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900">Images for prayer and reflection</h2>
+            </div>
+          </div>
+
+          <div id="gallery-list" class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3"></div>
+        </div>
+      </section>
+
+      <section id="about" class="mx-auto max-w-6xl px-5 py-16">
+        <div class="grid gap-8 md:grid-cols-3">
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="mb-4 inline-flex rounded-full bg-faith-50 p-2 text-faith-700">✝️</div>
+            <h3 class="text-xl font-bold text-slate-900">Scripture-first</h3>
+            <p class="mt-3 text-slate-600">The site is centered on the Bible and encourages people to discover God's truth in a beautiful, calm format.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="mb-4 inline-flex rounded-full bg-faith-50 p-2 text-faith-700">📖</div>
+            <h3 class="text-xl font-bold text-slate-900">KJV by default</h3>
+            <p class="mt-3 text-slate-600">This project begins with the public-domain King James Version and can easily switch to another licensed translation.</p>
+          </div>
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="mb-4 inline-flex rounded-full bg-faith-50 p-2 text-faith-700">🛠️</div>
+            <h3 class="text-xl font-bold text-slate-900">Simple CMS</h3>
+            <p class="mt-3 text-slate-600">Editors can manage scriptures and gallery content without needing to code.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="support" class="bg-slate-900 py-16 text-white">
+        <div class="mx-auto grid max-w-6xl gap-10 px-5 md:grid-cols-[1fr_0.9fr]">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-faith-200">Support the mission</p>
+            <h2 class="mt-2 text-3xl font-bold tracking-tight">Help keep the word of God flowing.</h2>
+            <p class="mt-4 max-w-xl text-slate-300">
+              Your support helps cover hosting, content creation, and ministry outreach. Every contribution is a blessing toward spreading hope and biblical encouragement.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="https://www.paypal.com" target="_blank" rel="noreferrer" class="rounded-full bg-faith-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-faith-400">Donate</a>
+              <a href="#newsletter" class="rounded-full border border-slate-600 px-5 py-3 text-sm font-semibold text-white transition hover:border-slate-400">Join newsletter</a>
+            </div>
+          </div>
+
+          <div id="newsletter" class="rounded-3xl border border-slate-700 bg-slate-800 p-6">
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-faith-200">Newsletter</p>
+            <form class="mt-5 space-y-4">
+              <label class="block">
+                <span class="mb-2 block text-sm text-slate-300">Email address</span>
+                <input type="email" placeholder="you@example.com" class="w-full rounded-xl border border-slate-600 bg-slate-700 px-4 py-3 text-white placeholder-slate-400 outline-none transition focus:border-faith-400" />
+              </label>
+              <button type="button" class="w-full rounded-xl bg-white px-4 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-200">Subscribe</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white">
+      <div class="mx-auto flex max-w-6xl flex-col gap-6 px-5 py-8 md:flex-row md:items-center md:justify-between">
+        <div class="text-slate-600">© 2026 Christian Word Center</div>
+        <div class="flex items-center gap-4 text-sm text-slate-600">
+          <a href="https://www.facebook.com" target="_blank" rel="noreferrer" class="hover:text-faith-700">Facebook</a>
+          <a href="https://www.instagram.com" target="_blank" rel="noreferrer" class="hover:text-faith-700">Instagram</a>
+          <a href="https://www.youtube.com" target="_blank" rel="noreferrer" class="hover:text-faith-700">YouTube</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
