@@ -1,4 +1,5 @@
-import './styles.css';
+import { loadBibleVerses } from './bible.js';
+import { t, setLanguage, getLanguage } from './i18n.js';
 
 const scriptureList = document.querySelector('#scripture-list');
 const galleryList = document.querySelector('#gallery-list');
@@ -7,17 +8,18 @@ const featuredVerse = document.querySelector('#featured-verse');
 const featuredReference = document.querySelector('#featured-reference');
 const copyVerseButton = document.querySelector('#copy-verse');
 const shareVerseButton = document.querySelector('#share-verse');
+const languageToggle = document.querySelector('#language-toggle');
 
 let scriptures = [];
 let gallery = [];
 
 async function loadContent() {
   const [scriptureRes, galleryRes] = await Promise.all([
-    fetch('/content/verses.json'),
+    loadBibleVerses(),
     fetch('/content/gallery.json'),
   ]);
 
-  scriptures = await scriptureRes.json();
+  scriptures = Array.isArray(scriptureRes) ? scriptureRes : [];
   gallery = await galleryRes.json();
 
   renderScriptures(scriptures);
@@ -40,7 +42,7 @@ function renderScriptures(items) {
   if (!scriptureList) return;
 
   if (!items.length) {
-    scriptureList.innerHTML = '<div class="rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-slate-500">No scriptures match your search.</div>';
+    scriptureList.innerHTML = `<div class="rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-slate-500">${t('noResults')}</div>`;
     return;
   }
 
@@ -53,9 +55,9 @@ function renderScriptures(items) {
           </div>
           <p class="text-lg leading-8 text-slate-700">“${item.text}”</p>
           <div class="mt-5 flex items-center justify-between gap-3">
-            <span class="text-xs uppercase tracking-[0.2em] text-slate-400">${item.topic || 'Scripture'}</span>
+            <span class="text-xs uppercase tracking-[0.2em] text-slate-400">${item.topic || t('scripture')}</span>
             <button data-reference="${item.reference}" data-text="${item.text}" class="verse-select rounded-full border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-faith-300 hover:text-faith-700">
-              Featured
+              ${t('featured')}
             </button>
           </div>
         </article>
@@ -79,8 +81,8 @@ function renderGallery(items) {
   if (!items.length) {
     galleryList.innerHTML = `
       <div class="col-span-full rounded-3xl border border-dashed border-slate-300 bg-slate-50 p-10 text-center">
-        <p class="text-lg font-semibold text-slate-800">Gallery is ready for your first image.</p>
-        <p class="mt-2 text-slate-500">Add images through the Netlify CMS admin or upload them into the site later.</p>
+        <p class="text-lg font-semibold text-slate-800">${t('galleryReady')}</p>
+        <p class="mt-2 text-slate-500">${t('galleryPlaceholder')}</p>
       </div>
     `;
     return;
@@ -116,9 +118,9 @@ copyVerseButton?.addEventListener('click', async () => {
   const text = `${featuredReference.textContent.replace('— ', '')}: ${featuredVerse.textContent.replace(/[“”]/g, '')}`;
   try {
     await navigator.clipboard.writeText(text);
-    copyVerseButton.textContent = 'Copied';
+    copyVerseButton.textContent = t('copied');
     setTimeout(() => {
-      copyVerseButton.textContent = 'Copy verse';
+      copyVerseButton.textContent = t('copyVerse');
     }, 1200);
   } catch (error) {
     console.error('Copy failed:', error);
@@ -139,10 +141,18 @@ shareVerseButton?.addEventListener('click', async () => {
   }
 
   await navigator.clipboard.writeText(`${text} ${url}`);
-  shareVerseButton.textContent = 'Link copied';
+  shareVerseButton.textContent = t('linkCopied');
   setTimeout(() => {
-    shareVerseButton.textContent = 'Share';
+    shareVerseButton.textContent = t('share');
   }, 1200);
+});
+
+languageToggle?.addEventListener('click', () => {
+  const nextLanguage = getLanguage() === 'en' ? 'es' : 'en';
+  setLanguage(nextLanguage);
+  languageToggle.textContent = nextLanguage === 'en' ? 'ES' : 'EN';
+  document.title = nextLanguage === 'en' ? 'Christian Word Center' : 'Centro de la Palabra Cristiana';
+  renderScriptures(scriptures);
 });
 
 loadContent();
